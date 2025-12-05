@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       0e5de23b-40b9-46cb-992d-7c68b7cb23ca
+:END:
+#+title: MPV Youtube
+* MPV Youtube
+Additional utilities needed
+Install:
+- https://github.com/yt-dlp/yt-dlp
+- https://github.com/yt-dlp/ejs

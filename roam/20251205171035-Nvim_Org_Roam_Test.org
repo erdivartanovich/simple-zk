@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID: 856e6a80-105d-4aea-a74b-79b1531c46cb
+:END:
+#+TITLE: Nvim Org Roam Test
+
+This is a note, taken from nvim org roam

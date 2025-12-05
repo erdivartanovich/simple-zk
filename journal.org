@@ -1,0 +1,5 @@
+* 2025
+** 2025-12 December
+*** 2025-12-04 Thursday
+**** [2025-12-04 Thu 21:24]
+Today I start using org mode and qutebrowser

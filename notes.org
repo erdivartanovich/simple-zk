@@ -1,0 +1,11 @@
+* Inbox
+** [2025-12-04 Thu]
+In  org mode to capture call cmd: org-capture
+** [2025-12-04 Thu]
+*** MPV Youtube
+Additional utilities needed
+Install:
+- https://github.com/yt-dlp/yt-dlp
+- https://github.com/yt-dlp/ejs
+* TODO Testing Second Note
+  [2025-12-05 Fri]
