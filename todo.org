@@ -1,6 +1,0 @@
-* Inbox
-** TODO RPR Project View :project:
-*** Ref: https://docs.google.com/spreadsheets/d/1LocMXrRs6p6ae3Negd4cS8yj5gOZf9b9G8ljSkRBqJU/edit?gid=0#gid=0
-*** Backlogs
-**** TODO [D4] user with basic access can remove himself (Remove Me) from a project-view :bug:
-SCHEDULED: <2025-12-05 Fri>

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID: eddd351a-426e-443c-9d1e-c0c47819b123
+:END:
+#+TITLE: Fizzy
+
+* Fizzy                                        :ideas:kanban:project-management:
+
+Fizzy is a kanban based project management
+web: https://fizzy.do
