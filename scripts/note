@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 ZK_NOTEBOOK_DIR="/home/rdi/Cabin/org/zettels"
-TARGET_DIR="$ZK_NOTEBOOK_DIR/fleeting"
+FLEETING_DIR="$ZK_NOTEBOOK_DIR/inbox"
+PERMANENT_DIR="$ZK_NOTEBOOK_DIR/permanent"
 
 print_header() {
     subtitle=${1:-"What's up"}
@@ -11,20 +12,87 @@ print_header() {
 	    "Quick note" "$subtitle"
 }
 
+print_guidance() {
+    case $1 in
+        "permanent-idea")
+            gum style --foreground 215 "💡 Permanent Idea Note: Your original thoughts and insights"
+            gum style --foreground 215 "   Will include 'Related Ideas' section for connections"
+            ;;
+        "permanent-source")
+            gum style --foreground 207 "📚 Permanent Literature Note: Knowledge from external sources"
+            gum style --foreground 207 "   Will include 'Parent/Children' sections for hierarchy"
+            ;;
+        "source")
+            gum style --foreground 207 "📖 Fleeting Literature Note: Quick literature capture"
+            gum style --foreground 207 "   Will be tagged as #source for later review"
+            ;;
+        "idea")
+            gum style --foreground 215 "💭 Fleeting Idea Note: Quick thought capture"
+            gum style --foreground 215 "   Will be tagged as #idea for later review"
+            ;;
+    esac
+}
+
+# Get note type first
+echo "Quick Capture"
+note_type=$(gum choose "source" "idea" "permanent-source" "permanent-idea") || exit 1
+
+# Set target directory and metadata based on type
+case $note_type in
+    "idea")
+        TARGET_DIR="$FLEETING_DIR"
+        IS_LITERATURE=0
+        ;;
+    "permanent-idea")
+        TARGET_DIR="$PERMANENT_DIR"
+        IS_LITERATURE=0
+        ;;
+    "source")
+        TARGET_DIR="$FLEETING_DIR"
+        IS_LITERATURE=1
+        ;;
+    "permanent-source")
+        TARGET_DIR="$PERMANENT_DIR"
+        IS_LITERATURE=1
+        ;;
+esac
+print_guidance "$note_type"
+
+# Collect title
 if [ $# -gt 0 ]; then
     title="$*"
     print_header "$title"
 else
-    print_header "$title"
+    print_header "Create $note_type note"
     while true; do
         title=$(gum input --placeholder "Note Title") || exit 1
         [ -n "$title" ] && break
     done
-fi
-note_type=$(gum choose "source" "idea" "fact") || exit 1
-if   [[ $note_type == "source" ]]; then
-   note_source=$(gum input --placeholder "Source (taken from)") || "" || exit 1
+    title="${title^}"
 fi
 
-# Finally create the note
-zk new  -t "$title" --extra type="$note_type",source="$note_source" "$TARGET_DIR"
+# Collect extra metadata
+extra_args=""
+
+# Add boolean flags for template conditionals
+if [ "$IS_LITERATURE" -eq 1 ]; then
+    extra_args="is_literature=1"
+else
+    extra_args="is_idea=1"
+fi
+
+# Collect source/author for source notes
+if [ "$IS_LITERATURE" -eq 1 ]; then
+    note_source=$(gum input --placeholder "Source (taken from)") || ""
+    note_author=$(gum input --placeholder "Author (if applicable)") || ""
+    if [ -n "$note_source" ]; then
+        extra_args="$extra_args,source=$note_source"
+    fi
+    if [ -n "$note_author" ]; then
+        extra_args="$extra_args,author=$note_author"
+    fi
+fi
+
+# Create the note
+echo $extra_args
+zk new -t "$title" --extra="$extra_args" "$TARGET_DIR"

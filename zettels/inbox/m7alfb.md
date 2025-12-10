@@ -1,4 +1,4 @@
-#fact
+#source
 date: 2025-12-10 05:34
 
 # Bash - Variable default value

@@ -22,20 +22,10 @@ id-length = 6
 # Letter case for the random IDs.
 id-case = "lower"
 
-
 # EXTRA VARIABLES
 [extra]
-author = "Erdiansyah"
-source=""
-type="idea" #or > source, fact
-
 
 # GROUP OVERRIDES
-[group.journal]
-paths = ["journal"]
-[group.journal.note]
-filename = "{{format-date now}}"
-template="daily.md"
 
 [group.fleeting]
 paths = ["fleeting"]
@@ -52,7 +42,6 @@ template="permanent.md"
 link-format = "markdown"
 hashtags = true
 colon-tags = true
-
 
 # EXTERNAL TOOLS
 [tool]

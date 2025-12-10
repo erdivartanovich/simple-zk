@@ -1,4 +1,4 @@
-#fact
+#source
 2025-12-09 10:18
 
 # Completion in Nvim
