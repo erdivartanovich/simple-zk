@@ -319,6 +319,12 @@ The system is tool-agnostic but optimized for these utilities:
 3. **Custom bash scripts**: Automation for note creation, link checking, orphan detection
 4. **Pandoc**: Document conversion (markdown ↔ PDF, HTML, etc.)
 5. **ImageMagick/magick**: Image processing (resize, optimize for web)
+6. **Opencode**: Local Agentic AI, can help as Personal Note Taking Assistant:
+   - Capture helper: A local AI quickly turns copied text, transcripts, or thoughts into clean fleeting notes.
+   - Structured learning: It automatically creates and organizes Permanent–Literature notes into the Pyramid hierarchy with correct parent/child links.
+   - Idea development: It helps turn insights into Permanent–Idea notes and suggests meaningful connections to existing ideas.
+   - Consistency enforcement: It checks that linking rules, tags, and file structure stay clean and consistent across the whole system.
+   - Automation layer: It runs CLI actions, generates templates, and maintains notes over time, becoming a private, offline knowledge assistant built on top of the note folder.
 
 ### Recommended Script Ideas
 
