@@ -4,7 +4,11 @@ date: {{ format-date now "%Y-%m-%d %H:%M:%S" }}
 keywords: []
 ---
 
-#{{extra.main_tag}}
+{{#if extra.is_literature}}
+#source
+{{else}}
+#idea
+{{/if}}
 
 # {{title}}
 
@@ -15,7 +19,7 @@ keywords: []
 
 {{content}}
 
-## {{#if extra.is_literature}}
+{{#if extra.is_literature}}
 
 ## Up
 
@@ -24,11 +28,11 @@ keywords: []
 ## Down
 
 - []()
-  {{/if}}
+{{/if}}
 
-## {{#unless extra.is_literature}}
+{{#if extra.is_idea}}
 
 ## Related Ideas
 
 - []()
-  {{/if}}
+{{/if}}
