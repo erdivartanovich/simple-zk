@@ -1,4 +1,4 @@
-#fact
+#literature
 2025-12-10 08:07
 
 # Qutebrowser keybindings

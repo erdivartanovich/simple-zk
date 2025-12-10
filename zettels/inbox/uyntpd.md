@@ -1,4 +1,4 @@
-#source
+#literature
 2025-12-10 05:55
 
 # Bash Test Operators Cheat Sheet

@@ -26,33 +26,13 @@ id-case = "lower"
 # EXTRA VARIABLES
 [extra]
 author = "Erdiansyah"
-source=""
-type="idea" #or > source, fact
 
-
-# GROUP OVERRIDES
-[group.journal]
-paths = ["journal"]
-[group.journal.note]
-filename = "{{format-date now}}"
-template="daily.md"
-
-[group.fleeting]
-paths = ["fleeting"]
-[group.fleeting.note]
-template="fleeting.md"
-
-[group.permanent]
-paths = ["permanent"]
-[group.permanent.note]
-template="permanent.md"
 
 # MARKDOWN SETTINGS
 [format.markdown]
 link-format = "markdown"
 hashtags = true
 colon-tags = true
-
 
 # EXTERNAL TOOLS
 [tool]
@@ -72,13 +52,11 @@ recents = "--sort created- --created-after 'last two weeks'"
 
 # COMMAND ALIASES
 [alias]
-
 edlast = "zk edit --limit 1 --sort modified- $@"
 recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"
 lucky = "zk list --quiet --format full --sort random --limit 1"
 ls="zk list -foneline"
 paths = "zk list --format \"'{{path}}'\" --quiet --delimiter ' ' $@"
-
 journal = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
 fleeting = 'zk new "$ZK_NOTEBOOK_DIR/inbox"'
 permanent = 'zk edit --interactive "$ZK_NOTEBOOK_DIR/permanent"'

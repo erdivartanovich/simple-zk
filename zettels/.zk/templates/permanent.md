@@ -1,11 +1,10 @@
 ---
 title: {{title}}
-type: permanent
 date: {{format-date now "%Y-%m-%d %H:%M:%S"}}
 keywords: []
 ---
 
-#{{extra.main_tag}} #{{extra.main_tag}}
+#{{extra.main_tag}}
 # {{title}}
 
 {{#if extra.source}}**Source:** {{extra.source}}{{/if}}
