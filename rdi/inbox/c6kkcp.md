@@ -1,9 +1,8 @@
-:PROPERTIES:
-:ID:       be4a4413-6fed-4e6c-acb9-1a5f00c65d8f
-:END:
-#+title: Qutebrowser
+#fact
+2025-12-10 08:07
 
-* Qutebrowser
+# Qutebrowser keybindings
+
 Qutebrowser, a keyboard-driven web browser, utilizes Vim-like keybindings for efficient navigation, including tab switching.
 ** Default Keybindings for Tab Switching:
 Next Tab: Press J (Shift + j) to switch to the tab on the right. If you are on the last tab, it will loop around to the first tab.
@@ -19,3 +18,6 @@ Reopen Last Closed Tab: Press Ctrl+Shift+T.
 Open a New Tab: Press Ctrl+T.
 Customizing Keybindings:
 Qutebrowser allows for extensive customization of keybindings. You can modify these bindings using the :bind command within qutebrowser or by editing your config.py file. For instance, to rebind tab-next to the right arrow key, you would use:
+
+
+
