@@ -34,7 +34,7 @@ print_guidance() {
 }
 
 # Get note type first
-note_type=$(gum choose "literature" "idea" "permanent-idea" "permanent-literature") || exit 1
+note_type=$(gum choose "literature" "idea" "permanent-literature" "permanent-idea") || exit 1
 
 # Set target directory and metadata based on type
 case $note_type in
@@ -42,28 +42,29 @@ case $note_type in
         TARGET_DIR="$PERMANENT_DIR"
         TEMPLATE="permanent.md"
         MAIN_TAG="idea"
-        print_guidance "$note_type"
         ;;
     "permanent-literature")
         TARGET_DIR="$PERMANENT_DIR"
         TEMPLATE="permanent.md"
         MAIN_TAG="literature"
-        print_guidance "$note_type"
-        ;;
-    "literature")
-        TARGET_DIR="$FLEETING_DIR"
-        TEMPLATE="fleeting.md"
-        MAIN_TAG=""
-        NOTE_HINT="literature"
         ;;
     "idea")
         TARGET_DIR="$FLEETING_DIR"
         TEMPLATE="fleeting.md"
-        MAIN_TAG=""
+        MAIN_TAG="idea"
         NOTE_HINT="idea"
+        ;;
+    "literature")
+        TARGET_DIR="$FLEETING_DIR"
+        TEMPLATE="fleeting.md"
+        MAIN_TAG="literature"
+        NOTE_HINT="literature"
         ;;
 esac
 
+print_guidance "$note_type"
+
+# Collect title
 if [ $# -gt 0 ]; then
     title="$*"
     print_header "$title"
@@ -81,15 +82,13 @@ extra_args=""
 # Add main tag for permanent notes or hint for fleeting notes
 if [ -n "$MAIN_TAG" ]; then
     extra_args="--extra main_tag=$MAIN_TAG"
-elif [ -n "$NOTE_HINT" ]; then
-    extra_args="--extra type=$NOTE_HINT"
 fi
 
 # Add boolean flags for template conditionals
 if [[ $note_type == "permanent-literature" ]]; then
     extra_args="$extra_args --extra is_literature=true"
 elif [[ $note_type == "permanent-idea" ]]; then
-    extra_args="$extra_args --extra is_idea=true"
+    extra_args="$extra_args --extra is_literature=false"
 fi
 
 # Collect source/author for literature notes
@@ -103,8 +102,6 @@ if [[ $note_type == "permanent-literature" ]] || [[ $note_type == "literature" ]
         extra_args="$extra_args --extra author=\"$note_author\""
     fi
 fi
-
-# Keywords can be added manually to frontmatter after note creation
 
 # Create the note
 zk new -t "$title" --template "$TEMPLATE" $extra_args "$TARGET_DIR"
