@@ -1,6 +1,23 @@
-# My Personal Note System
+# Hybrid Zettelkasten–Pyramid Note System
 
-A personal knowledge management system using a custom zettelkasten methodology. Primarily contains knowledge about Linux systems and programming, but accommodates any topic.
+This system mixes two ideas: a Pyramid structure for organizing information from books, articles,
+and videos, and a Zettelkasten network for connecting original thoughts and insights. Software
+development involves learning from many fast-changing sources, and no single method handles both
+structured learning and creative thinking well on its own.
+
+To keep things simple:
+
+- Fleeting notes capture anything quickly during reading or watching.
+- Permanent–Literature notes store information from external sources in a clear hierarchy (a
+  deliberate change from the original ZK, where literature notes are temporary).
+- Permanent–Idea notes hold original thoughts and connect freely, forming a small knowledge graph.
+
+This creates two layers that work together: a stable, organized base for everything learned from
+outside sources, and a flexible network for ideas, decisions, problem-solving, and insights that
+grow over time.
+
+The result is a straightforward system that supports daily learning in software development: fast
+capture, organized understanding, and a place for deeper thinking.
 
 ## Core Philosophy
 
