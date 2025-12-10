@@ -2,9 +2,7 @@
 title: {{title}}
 type: permanent
 date: {{format-date now "%Y-%m-%d %H:%M:%S"}}
-keywords: {{#if extra.keywords}}{{extra.keywords}}{{else}}[]{{/if}}
-# Source information (for literature notes only)
-{{#if extra.source}}source: {{extra.source}}{{/if}}
+keywords: []
 ---
 
 #{{extra.main_tag}} #{{extra.main_tag}}

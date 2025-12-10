@@ -87,15 +87,7 @@ if [[ $note_type == "permanent-literature" ]] || [[ $note_type == "source" ]]; t
     fi
 fi
 
-# Collect additional keywords for permanent notes
-if [[ $note_type == permanent-* ]]; then
-    note_keywords=$(gum input --placeholder "Additional keywords (comma separated)") || ""
-    if [ -n "$note_keywords" ]; then
-        # Format as YAML array without quotes around individual items
-        formatted_keywords=$(echo "$note_keywords" | sed 's/ *, */", "/g' | sed 's/^/"/' | sed 's/$/"/')
-        extra_args="$extra_args --extra keywords=[$formatted_keywords]"
-    fi
-fi
+# Keywords can be added manually to frontmatter after note creation
 
 # Create the note
 zk new -t "$title" --template "$TEMPLATE" $extra_args "$TARGET_DIR"
