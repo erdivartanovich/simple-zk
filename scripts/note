@@ -95,4 +95,4 @@ fi
 
 # Create the note
 echo $extra_args
-zk new -n -t "$title" --extra="$extra_args" "$TARGET_DIR"
+zk new -t "$title" --extra="$extra_args" "$TARGET_DIR"
