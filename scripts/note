@@ -15,18 +15,26 @@ print_header() {
 print_guidance() {
     case $1 in
         "permanent-idea")
-            gum style --foreground 215 "💡 Idea Note: Your original thoughts and insights"
+            gum style --foreground 215 "💡 Permanent Idea Note: Your original thoughts and insights"
             gum style --foreground 215 "   Will include 'Related Ideas' section for connections"
             ;;
         "permanent-literature")
-            gum style --foreground 207 "📚 Literature Note: Knowledge from external sources"
+            gum style --foreground 207 "📚 Permanent Literature Note: Knowledge from external sources"
             gum style --foreground 207 "   Will include 'Parent/Children' sections for hierarchy"
+            ;;
+        "literature")
+            gum style --foreground 207 "📖 Fleeting Literature Note: Quick source capture"
+            gum style --foreground 207 "   Will be tagged as #literature for later review"
+            ;;
+        "idea")
+            gum style --foreground 215 "💭 Fleeting Idea Note: Quick thought capture"
+            gum style --foreground 215 "   Will be tagged as #idea for later review"
             ;;
     esac
 }
 
 # Get note type first
-note_type=$(gum choose "fleeting" "permanent-idea" "permanent-literature" "source" "idea" "fact") || exit 1
+note_type=$(gum choose "literature" "idea" "permanent-idea" "permanent-literature") || exit 1
 
 # Set target directory and metadata based on type
 case $note_type in
@@ -42,10 +50,17 @@ case $note_type in
         MAIN_TAG="literature"
         print_guidance "$note_type"
         ;;
-    *)
+    "literature")
         TARGET_DIR="$FLEETING_DIR"
         TEMPLATE="fleeting.md"
         MAIN_TAG=""
+        NOTE_HINT="literature"
+        ;;
+    "idea")
+        TARGET_DIR="$FLEETING_DIR"
+        TEMPLATE="fleeting.md"
+        MAIN_TAG=""
+        NOTE_HINT="idea"
         ;;
 esac
 
@@ -63,9 +78,11 @@ fi
 # Collect extra metadata
 extra_args=""
 
-# Add main tag for permanent notes
+# Add main tag for permanent notes or hint for fleeting notes
 if [ -n "$MAIN_TAG" ]; then
     extra_args="--extra main_tag=$MAIN_TAG"
+elif [ -n "$NOTE_HINT" ]; then
+    extra_args="--extra type=$NOTE_HINT"
 fi
 
 # Add boolean flags for template conditionals
@@ -76,7 +93,7 @@ elif [[ $note_type == "permanent-idea" ]]; then
 fi
 
 # Collect source/author for literature notes
-if [[ $note_type == "permanent-literature" ]] || [[ $note_type == "source" ]]; then
+if [[ $note_type == "permanent-literature" ]] || [[ $note_type == "literature" ]]; then
     note_source=$(gum input --placeholder "Source (taken from)") || ""
     note_author=$(gum input --placeholder "Author (if applicable)") || ""
     if [ -n "$note_source" ]; then
