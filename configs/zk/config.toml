@@ -1,5 +1,8 @@
 # GLOBAL NOTEBOOK SETTINGS
+# Put this in ~/.config/zk folder
+
 [notebook]
+# Change this according to your local
 dir = "~/Cabin/org/zettels"
 
 # NOTE SETTINGS
