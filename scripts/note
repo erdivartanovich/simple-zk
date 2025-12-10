@@ -65,7 +65,7 @@ extra_args=""
 
 # Add main tag for permanent notes
 if [ -n "$MAIN_TAG" ]; then
-    extra_args="--extra main_tag=\"$MAIN_TAG\""
+    extra_args="--extra main_tag=$MAIN_TAG"
 fi
 
 # Add boolean flags for template conditionals
@@ -91,9 +91,9 @@ fi
 if [[ $note_type == permanent-* ]]; then
     note_keywords=$(gum input --placeholder "Additional keywords (comma separated)") || ""
     if [ -n "$note_keywords" ]; then
-        # Format as YAML array
-        formatted_keywords=$(echo "$note_keywords" | sed 's/[^,]*/"&"/g' | sed 's/,/, /g')
-        extra_args="$extra_args --extra keywords=\"[$formatted_keywords]\""
+        # Format as YAML array without quotes around individual items
+        formatted_keywords=$(echo "$note_keywords" | sed 's/ *, */", "/g' | sed 's/^/"/' | sed 's/$/"/')
+        extra_args="$extra_args --extra keywords=[$formatted_keywords]"
     fi
 fi
 
