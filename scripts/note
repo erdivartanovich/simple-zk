@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+ZK_NOTEBOOK_DIR="/home/rdi/Cabin/org/zettels"
+TARGET_DIR="$ZK_NOTEBOOK_DIR/fleeting"
+
+print_header() {
+    subtitle=${1:-"What's up"}
+    gum style \
+	    --foreground 228 --border-foreground 228 --border rounded \
+	    --align center --width 67 --margin "1 2" --padding "1 1" \
+	    "Quick note" "$subtitle"
+}
+
+if [ $# -gt 0 ]; then
+    title="$*"
+    print_header "$title"
+else
+    print_header "$title"
+    while true; do
+        title=$(gum input --placeholder "Note Title") || exit 1
+        [ -n "$title" ] && break
+    done
+fi
+note_type=$(gum choose "source" "idea" "fact") || exit 1
+if   [[ $note_type == "source" ]]; then
+   note_source=$(gum input --placeholder "Source (taken from)") || "" || exit 1
+fi
+
+# Finally create the note
+zk new  -t "$title" --extra type="$note_type",source="$note_source" "$TARGET_DIR"

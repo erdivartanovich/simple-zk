@@ -1,0 +1,93 @@
+# GLOBAL NOTEBOOK SETTINGS
+[notebook]
+dir = "~/Cabin/org/zettels"
+
+# NOTE SETTINGS
+[note]
+
+anguage = "en"
+default-title = "Untitled"
+# filename = "{{id}}-{{slug title}}"
+filename = "{{id}}"
+extension = "md"
+
+# Template used to generate a note's content.
+# If not an absolute path, it is relative to .zk/templates/
+template = "default.md"
+
+# The charset used for random IDs.
+id-charset = "alphanum"
+# Length of the generated IDs.
+id-length = 6
+# Letter case for the random IDs.
+id-case = "lower"
+
+
+# EXTRA VARIABLES
+[extra]
+author = "Erdiansyah"
+source=""
+type="idea" #or > source, fact
+
+
+# GROUP OVERRIDES
+[group.journal]
+paths = ["journal"]
+[group.journal.note]
+filename = "{{format-date now}}"
+template="daily.md"
+
+[group.fleeting]
+paths = ["fleeting"]
+[group.fleeting.note]
+template="fleeting.md"
+
+[group.permanent]
+paths = ["permanent"]
+[group.permanent.note]
+template="permanent.md"
+
+# MARKDOWN SETTINGS
+[format.markdown]
+link-format = "markdown"
+hashtags = true
+colon-tags = true
+
+
+# EXTERNAL TOOLS
+[tool]
+
+# Default editor used to open notes.
+editor = "nvim"
+# Default shell used by aliases and commands.
+shell = "/bin/bash"
+# Pager used to scroll through long output.
+pager = "less -FIRX"
+# Command used to preview a note during interactive fzf mode.
+fzf-preview = "bat -p --color always {-1}"
+
+# NAMED FILTERS
+[filter]
+recents = "--sort created- --created-after 'last two weeks'"
+
+# COMMAND ALIASES
+[alias]
+
+edlast = "zk edit --limit 1 --sort modified- $@"
+recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"
+lucky = "zk list --quiet --format full --sort random --limit 1"
+ls="zk list -foneline"
+paths = "zk list --format \"'{{path}}'\" --quiet --delimiter ' ' $@"
+
+journal = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
+fleeting = 'zk new "$ZK_NOTEBOOK_DIR/inbox"'
+permanent = 'zk edit --interactive "$ZK_NOTEBOOK_DIR/permanent"'
+
+# LSP (EDITOR INTEGRATION)
+[lsp]
+
+[lsp.diagnostics]
+# Report titles of wiki-links as hints.
+wiki-title = "hint"
+# Warn for dead links between notes.
+dead-link = "error"
