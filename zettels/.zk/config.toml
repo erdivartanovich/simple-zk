@@ -160,6 +160,32 @@ dead-link = "error"
 #recents = "--sort created- --created-after 'last two weeks'"
 
 
+# GROUP OVERRIDES
+#
+# You can override global settings from [note] and [extra] for a particular
+# group of notes by declaring a [group."<name>"] section.
+#
+# Specify the list of directories which will automatically belong to the group
+# with the optional `paths` property.
+#
+# Omitting `paths` is equivalent to providing a single path equal to the name of
+# the group. This can be useful to quickly declare a group by the name of the
+# directory it applies to.
+
+[group."permanent"]
+paths = ["permanent"]
+[group."permanent".note]
+template = "permanent.md"
+[group."permanent".extra]
+type = "permanent"
+status = "draft"
+
+[group."inbox"]
+paths = ["inbox"]
+[group."inbox".note]
+template = "fleeting.md"
+
+
 # COMMAND ALIASES
 #
 #   Aliases are user commands called with `zk <alias> [<flags>] [<args>]`.

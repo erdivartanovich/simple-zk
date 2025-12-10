@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 ZK_NOTEBOOK_DIR="/home/rdi/Cabin/org/zettels"
-TARGET_DIR="$ZK_NOTEBOOK_DIR/fleeting"
+FLEETING_DIR="$ZK_NOTEBOOK_DIR/inbox"
+PERMANENT_DIR="$ZK_NOTEBOOK_DIR/permanent"
 
 print_header() {
     subtitle=${1:-"What's up"}
@@ -11,20 +12,90 @@ print_header() {
 	    "Quick note" "$subtitle"
 }
 
+print_guidance() {
+    case $1 in
+        "permanent-idea")
+            gum style --foreground 215 "💡 Idea Note: Your original thoughts and insights"
+            gum style --foreground 215 "   Will include 'Related Ideas' section for connections"
+            ;;
+        "permanent-literature")
+            gum style --foreground 207 "📚 Literature Note: Knowledge from external sources"
+            gum style --foreground 207 "   Will include 'Parent/Children' sections for hierarchy"
+            ;;
+    esac
+}
+
+# Get note type first
+note_type=$(gum choose "fleeting" "permanent-idea" "permanent-literature" "source" "idea" "fact") || exit 1
+
+# Set target directory and metadata based on type
+case $note_type in
+    "permanent-idea")
+        TARGET_DIR="$PERMANENT_DIR"
+        TEMPLATE="permanent.md"
+        MAIN_TAG="idea"
+        print_guidance "$note_type"
+        ;;
+    "permanent-literature")
+        TARGET_DIR="$PERMANENT_DIR"
+        TEMPLATE="permanent.md"
+        MAIN_TAG="literature"
+        print_guidance "$note_type"
+        ;;
+    *)
+        TARGET_DIR="$FLEETING_DIR"
+        TEMPLATE="fleeting.md"
+        MAIN_TAG=""
+        ;;
+esac
+
 if [ $# -gt 0 ]; then
     title="$*"
     print_header "$title"
 else
-    print_header "$title"
+    print_header "Create $note_type note"
     while true; do
         title=$(gum input --placeholder "Note Title") || exit 1
         [ -n "$title" ] && break
     done
 fi
-note_type=$(gum choose "source" "idea" "fact") || exit 1
-if   [[ $note_type == "source" ]]; then
-   note_source=$(gum input --placeholder "Source (taken from)") || "" || exit 1
+
+# Collect extra metadata
+extra_args=""
+
+# Add main tag for permanent notes
+if [ -n "$MAIN_TAG" ]; then
+    extra_args="--extra main_tag=\"$MAIN_TAG\""
 fi
 
-# Finally create the note
-zk new  -t "$title" --extra type="$note_type",source="$note_source" "$TARGET_DIR"
+# Add boolean flags for template conditionals
+if [[ $note_type == "permanent-literature" ]]; then
+    extra_args="$extra_args --extra is_literature=true"
+elif [[ $note_type == "permanent-idea" ]]; then
+    extra_args="$extra_args --extra is_idea=true"
+fi
+
+# Collect source/author for literature notes
+if [[ $note_type == "permanent-literature" ]] || [[ $note_type == "source" ]]; then
+    note_source=$(gum input --placeholder "Source (taken from)") || ""
+    note_author=$(gum input --placeholder "Author (if applicable)") || ""
+    if [ -n "$note_source" ]; then
+        extra_args="$extra_args --extra source=\"$note_source\""
+    fi
+    if [ -n "$note_author" ]; then
+        extra_args="$extra_args --extra author=\"$note_author\""
+    fi
+fi
+
+# Collect additional keywords for permanent notes
+if [[ $note_type == permanent-* ]]; then
+    note_keywords=$(gum input --placeholder "Additional keywords (comma separated)") || ""
+    if [ -n "$note_keywords" ]; then
+        # Format as YAML array
+        formatted_keywords=$(echo "$note_keywords" | sed 's/[^,]*/"&"/g' | sed 's/,/, /g')
+        extra_args="$extra_args --extra keywords=\"[$formatted_keywords]\""
+    fi
+fi
+
+# Create the note
+zk new -t "$title" --template "$TEMPLATE" $extra_args "$TARGET_DIR"
