@@ -24,8 +24,6 @@ id-case = "lower"
 
 # EXTRA VARIABLES
 [extra]
-author = "Erdiansyah"
-source=""
 
 # GROUP OVERRIDES
 

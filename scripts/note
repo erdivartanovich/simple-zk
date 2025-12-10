@@ -18,13 +18,13 @@ print_guidance() {
             gum style --foreground 215 "💡 Permanent Idea Note: Your original thoughts and insights"
             gum style --foreground 215 "   Will include 'Related Ideas' section for connections"
             ;;
-        "permanent-literature")
+        "permanent-source")
             gum style --foreground 207 "📚 Permanent Literature Note: Knowledge from external sources"
             gum style --foreground 207 "   Will include 'Parent/Children' sections for hierarchy"
             ;;
-        "literature")
+        "source")
             gum style --foreground 207 "📖 Fleeting Literature Note: Quick source capture"
-            gum style --foreground 207 "   Will be tagged as #literature for later review"
+            gum style --foreground 207 "   Will be tagged as #source for later review"
             ;;
         "idea")
             gum style --foreground 215 "💭 Fleeting Idea Note: Quick thought capture"
@@ -34,7 +34,7 @@ print_guidance() {
 }
 
 # Get note type first
-note_type=$(gum choose "literature" "idea" "permanent-literature" "permanent-idea") || exit 1
+note_type=$(gum choose "source" "idea" "permanent-source" "permanent-idea") || exit 1
 
 # Set target directory and metadata based on type
 case $note_type in
@@ -43,10 +43,10 @@ case $note_type in
         TEMPLATE="permanent.md"
         MAIN_TAG="idea"
         ;;
-    "permanent-literature")
+    "permanent-source")
         TARGET_DIR="$PERMANENT_DIR"
         TEMPLATE="permanent.md"
-        MAIN_TAG="literature"
+        MAIN_TAG="source"
         ;;
     "idea")
         TARGET_DIR="$FLEETING_DIR"
@@ -54,11 +54,11 @@ case $note_type in
         MAIN_TAG="idea"
         NOTE_HINT="idea"
         ;;
-    "literature")
+    "source")
         TARGET_DIR="$FLEETING_DIR"
         TEMPLATE="fleeting.md"
-        MAIN_TAG="literature"
-        NOTE_HINT="literature"
+        MAIN_TAG="source"
+        NOTE_HINT="source"
         ;;
 esac
 
@@ -85,14 +85,14 @@ if [ -n "$MAIN_TAG" ]; then
 fi
 
 # Add boolean flags for template conditionals
-if [[ $note_type == "permanent-literature" ]]; then
-    extra_args="$extra_args --extra is_literature=true"
+if [[ $note_type == "permanent-source" ]]; then
+    extra_args="$extra_args --extra is_source=true"
 elif [[ $note_type == "permanent-idea" ]]; then
-    extra_args="$extra_args --extra is_literature=false"
+    extra_args="$extra_args --extra is_source=false"
 fi
 
-# Collect source/author for literature notes
-if [[ $note_type == "permanent-literature" ]] || [[ $note_type == "literature" ]]; then
+# Collect source/author for source notes
+if [[ $note_type == "permanent-source" ]] || [[ $note_type == "source" ]]; then
     note_source=$(gum input --placeholder "Source (taken from)") || ""
     note_author=$(gum input --placeholder "Author (if applicable)") || ""
     if [ -n "$note_source" ]; then

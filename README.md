@@ -20,7 +20,7 @@ Fleeting notes serve as my cognitive inbox—a temporary holding space for raw t
 **Characteristics:**
 
 - Raw, unprocessed capture
-- Tagged with `#literature` or `#idea` to signal processing intent
+- Tagged with `#source` or `#idea` to signal processing intent
 - No linking requirements
 - Temporary by design, convert or delete within days
 - Low friction: capture first, refine later
@@ -31,7 +31,7 @@ Fleeting notes serve as my cognitive inbox—a temporary holding space for raw t
 
 Permanent notes are my refined knowledge base. While stored together, they follow two distinct conceptual models based on their main tags.
 
-#### Literature Notes (`#literature`)
+#### Literature Notes (`#source`)
 
 **Model:** Pyramid/Tree Structure
 
@@ -128,7 +128,7 @@ zettels/
 
 ### Tags
 
-Other than the main tag #idea / #literature, a note can have additional tags in the following
+Other than the main tag #idea / #source, a note can have additional tags in the following
 syntaxes:
 
 - #hashtags
@@ -257,7 +257,7 @@ The complete system creates a natural separation of concerns:
 ### Reading a Book
 
 1. Capture fleeting notes in `/inbox/` while reading
-2. Process into literature notes (`#literature`)
+2. Process into literature notes (`#source`)
 3. Organize hierarchically under existing concepts or create new branches
 4. Link parent (up) and children (down)
 

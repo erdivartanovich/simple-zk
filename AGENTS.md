@@ -42,4 +42,4 @@ Overview and more detail please read the [Concept](/README.md)
 - Linux-focused unless stated otherwise
 - Plain text first approach
 - Tool-agnostic (works with zk, Obsidian, Vim, etc.)
-- Separate external knowledge (#literature) from internal thinking (#idea)
+- Separate external literature knowledge (#source) from internal thinking (#idea)
