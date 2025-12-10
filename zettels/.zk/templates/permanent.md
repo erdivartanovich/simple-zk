@@ -1,8 +1,7 @@
 ---
 title: {{title}}
 type: permanent
-created: {{format-date now "%Y-%m-%d %H:%M:%S"}}
-modified: {{format-date now "%Y-%m-%d %H:%M:%S"}}
+date: {{format-date now "%Y-%m-%d %H:%M:%S"}}
 keywords: {{#if extra.keywords}}{{extra.keywords}}{{else}}[]{{/if}}
 # Source information (for literature notes only)
 {{#if extra.source}}source: {{extra.source}}{{/if}}
