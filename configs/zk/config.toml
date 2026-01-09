@@ -75,6 +75,7 @@ paths = "zk list --format \"'{{path}}'\" --quiet --delimiter ' ' $@"
 journal = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
 fleeting = 'zk new "$ZK_NOTEBOOK_DIR/inbox"'
 permanent = 'zk edit --interactive "$ZK_NOTEBOOK_DIR/permanent"'
+vocab = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/vocabs"'
 
 # LSP (EDITOR INTEGRATION)
 [lsp]

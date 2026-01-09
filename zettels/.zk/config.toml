@@ -1,3 +1,5 @@
+[group.vocabs]
+paths = ["vocabs"]
 [group.journal]
 paths = ["journal"]
 [group."inbox"]
