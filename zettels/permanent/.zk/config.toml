@@ -1,0 +1,5 @@
+[note]
+template = "default.md"
+
+[tool]
+fzf-options = "--preview-label='PERMANENT NOTE' --tiebreak begin --exact --tabstop 2 --height 100% --layout reverse-list --no-hscroll --color fg:7,bg:0,hl:1,fg+:255,bg+:1,hl+:255 --preview-window top:60%:wrap"

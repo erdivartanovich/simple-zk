@@ -3,7 +3,7 @@
 
 [notebook]
 # Change this according to your local
-dir = "~/Cabin/org/zettels"
+dir = "~/Cabin/org/zettels/inbox"
 
 # NOTE SETTINGS
 [note]
@@ -27,18 +27,6 @@ id-case = "lower"
 
 # EXTRA VARIABLES
 [extra]
-
-# GROUP OVERRIDES
-
-[group.fleeting]
-paths = ["fleeting"]
-[group.fleeting.note]
-template="fleeting.md"
-
-[group.permanent]
-paths = ["permanent"]
-[group.permanent.note]
-template="permanent.md"
 
 # MARKDOWN SETTINGS
 [format.markdown]
@@ -73,9 +61,9 @@ ls="zk list -foneline"
 paths = "zk list --format \"'{{path}}'\" --quiet --delimiter ' ' $@"
 
 journal = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
-fleeting = 'zk new "$ZK_NOTEBOOK_DIR/inbox"'
-permanent = 'zk edit --interactive "$ZK_NOTEBOOK_DIR/permanent"'
-vocab = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/vocabs"'
+fleeting = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/inbox"'
+permanent = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/permanent"'
+vocab = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/vocabs"'
 
 # LSP (EDITOR INTEGRATION)
 [lsp]
