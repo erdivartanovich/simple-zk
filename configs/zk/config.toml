@@ -60,10 +60,11 @@ lucky = "zk list --quiet --format full --sort random --limit 1"
 ls="zk list -foneline"
 paths = "zk list --format \"'{{path}}'\" --quiet --delimiter ' ' $@"
 
-journal = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
+journal = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/journal"'
 fleeting = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/inbox"'
 permanent = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/permanent"'
-vocab = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/vocabs"'
+vocab = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/vocab"'
+task = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/task"'
 
 # LSP (EDITOR INTEGRATION)
 [lsp]
