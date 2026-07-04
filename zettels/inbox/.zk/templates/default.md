@@ -4,11 +4,14 @@
 #idea
 {{/if}}
 {{format-date now "%Y-%m-%d %H:%M"}}
-Source:
-Author:
 
 ---
 
 # {{title}}
+
+{{#if extra.is_literature}}
+Source:
+Author:
+{{/if}}
 
 {{content}}
