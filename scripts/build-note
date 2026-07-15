@@ -1,0 +1,152 @@
+#!/usr/bin/env bash
+# build-note — render zk markdown notes to cached PDFs.
+#
+# Builds live in the XDG cache (untracked, rebuildable on any/fresh system);
+# they mirror the note's path under the notebook, e.g.
+#   ~/Cabin/org/zettels/inbox/f7t6td.md
+#     -> $XDG_CACHE_HOME/note-builds/inbox/f7t6td.pdf
+#
+# Callers:
+#   - nvim BufWritePost on note files (silent background rebuild on save)
+#   - nvim :NotePdf / zk interactive fzf ctrl-o: open the built PDF in zathura
+#   - `make build` in the notes repo: warm the whole cache on a fresh system
+#
+# Usage:
+#   build-note <note.md>          build if the PDF is missing or stale (default)
+#   build-note --force <note.md>  rebuild even if up to date
+#   build-note --path  <note.md>  print the cache PDF path and exit
+#   build-note --open  <note.md>  ensure fresh, then open in zathura (detached)
+#   build-note --all [--force]    build every note (parallel; fresh-system warm-up)
+#   build-note --prune            delete PDFs whose source note is gone
+#   build-note --all --prune      reconcile the cache with the notebook
+#
+# Env overrides:
+#   NOTES_DIR        notebook root for the cache mirror (def ~/Cabin/org/zettels)
+#   NOTE_PDF_ENGINE  pandoc --pdf-engine (def: typst, falls back to xelatex)
+#   NOTE_PDF_FONT    typst main font (def: "Liberation Sans")
+#   NOTE_BUILD_DIR   cache root (def: $XDG_CACHE_HOME/note-builds)
+
+set -euo pipefail
+
+self="$(realpath -- "$0" 2>/dev/null || printf '%s' "$0")"
+
+force=0 all=0 prune=0 mode=build
+while [ $# -gt 0 ]; do
+	case "$1" in
+	--force) force=1 ;;
+	--all)   all=1 ;;
+	--prune) prune=1 ;;
+	--path)  mode=path ;;
+	--open)  mode=open ;;
+	--) shift; break ;;
+	--*) printf 'build-note: unknown option %s\n' "$1" >&2; exit 2 ;;
+	*) break ;;
+	esac
+	shift
+done
+
+NOTES_DIR="${NOTES_DIR:-$HOME/Cabin/org/zettels}"
+notes_root="$(realpath -m -- "$NOTES_DIR")"
+cache_root="${NOTE_BUILD_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/note-builds}"
+engine="${NOTE_PDF_ENGINE:-typst}"
+font="${NOTE_PDF_FONT:-Liberation Sans}"
+log="$cache_root/build.log"
+
+# cache PDF path for a note; notes outside the notebook get a stable,
+# collision-free name under _external/ so nothing clobbers.
+pdf_for() {
+	case "$1" in
+	"$notes_root"/*)
+		local rel="${1#"$notes_root"/}"
+		printf '%s\n' "$cache_root/${rel%.*}.pdf"
+		;;
+	*)
+		local h base
+		h="$(printf '%s' "$1" | cksum | cut -d' ' -f1)"
+		base="$(basename -- "$1")"
+		printf '%s\n' "$cache_root/_external/${base%.*}-$h.pdf"
+		;;
+	esac
+}
+
+render() { # render <engine> <src> <tmp>
+	# disable $-math so shell/code notes ("$a" -eq "$b") aren't parsed as TeX
+	local reader='markdown-tex_math_dollars'
+	case "$1" in
+	typst) pandoc -f "$reader" --pdf-engine=typst -V mainfont="$font" -o "$3" "$2" 2>>"$log" ;;
+	*)     pandoc -f "$reader" --pdf-engine="$1" -o "$3" "$2" 2>>"$log" ;;
+	esac
+}
+
+build_one() { # build_one <abs-src> — build if stale/forced, else no-op
+	local src="$1" pdf tmp
+	pdf="$(pdf_for "$src")"
+	if [ -f "$pdf" ] && [ ! "$src" -nt "$pdf" ] && [ "$force" = 0 ]; then
+		return 0
+	fi
+	command -v pandoc >/dev/null 2>&1 || { echo "build-note: pandoc not found" >&2; return 1; }
+	mkdir -p "$cache_root" "$(dirname -- "$pdf")"
+	tmp="$pdf.tmp.$$.pdf" # keep .pdf so pandoc picks the PDF writer (hence the engine)
+	# try the chosen engine; typst falls back to xelatex (LaTeX toolchain)
+	if render "$engine" "$src" "$tmp" || { [ "$engine" = typst ] && render xelatex "$src" "$tmp"; }; then
+		mv -f -- "$tmp" "$pdf"
+	else
+		rm -f -- "$tmp"
+		printf 'build-note: render failed for %s (see %s)\n' "$src" "$log" >&2
+		return 1
+	fi
+}
+
+open_pdf() {
+	command -v zathura >/dev/null 2>&1 || { echo "build-note: zathura not found" >&2; exit 1; }
+	setsid -f zathura "$1" >/dev/null 2>&1
+}
+
+find_notes() { # NUL-delimited note files, skipping hidden dirs (.zk, .zk_bak, .git…)
+	find "$notes_root" -type d -name '.*' -prune -o -type f -name '*.md' -print0
+}
+
+prune_orphans() {
+	[ -d "$cache_root" ] || return 0
+	# the PDFs that *should* exist: exactly one per current note
+	local -A keep=()
+	local f pf
+	while IFS= read -r -d '' f; do keep["$(pdf_for "$f")"]=1; done < <(find_notes)
+	local n=0
+	while IFS= read -r -d '' pf; do
+		case "${pf#"$cache_root"/}" in _external/*) continue ;; esac # can't map back; leave
+		[ -n "${keep[$pf]:-}" ] || { rm -f -- "$pf"; n=$((n + 1)); }
+	done < <(find "$cache_root" -type f -name '*.pdf' -print0)
+	find "$cache_root" -type d -empty -delete 2>/dev/null || true
+	printf 'build-note: pruned %d orphaned PDF(s)\n' "$n"
+}
+
+# ---- bulk modes ----
+if [ "$all" = 1 ] || [ "$prune" = 1 ]; then
+	if [ "$all" = 1 ]; then
+		mkdir -p "$cache_root"
+		count="$(find "$notes_root" -type d -name '.*' -prune -o -type f -name '*.md' -printf 'x' | wc -c)"
+		printf 'build-note: building %s note(s) under %s ...\n' "$count" "$notes_root"
+		cmd=("$self")
+		[ "$force" = 1 ] && cmd+=(--force)
+		# one process per note, bounded parallelism; a single bad note won't abort
+		find_notes | xargs -0 -r -P "$(nproc 2>/dev/null || echo 4)" -n1 "${cmd[@]}" || true
+		printf 'build-note: done (cache: %s)\n' "$cache_root"
+	fi
+	[ "$prune" = 1 ] && prune_orphans
+	exit 0
+fi
+
+# ---- single-note mode ----
+[ "${1:-}" ] || { echo "build-note: no note file given" >&2; exit 2; }
+# {-1} from fzf may be notebook-relative — resolve against the caller's cwd
+src="$(realpath -e -- "$1" 2>/dev/null)" || { printf 'build-note: not found: %s\n' "$1" >&2; exit 2; }
+
+if [ "$mode" = path ]; then
+	pdf_for "$src"
+	exit 0
+fi
+
+build_one "$src"
+[ "$mode" = open ] && open_pdf "$(pdf_for "$src")"
+exit 0

@@ -1,0 +1,9 @@
+[note]
+template = "default.md"
+
+[extra]
+is_literature = "1"
+
+[tool]
+fzf-line = "{{style 'white' title}}{{#each tags}} {{#style 'cyan'}} #{{this}}{{/style}}{{/each}} {{style 'white' body}}"
+fzf-options = "--preview-label='CAPTURE NOTE' --tiebreak begin --exact --tabstop 2 --height 100% --layout reverse-list --no-hscroll --preview-window top:60%:wrap"

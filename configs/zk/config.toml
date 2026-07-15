@@ -3,7 +3,7 @@
 
 [notebook]
 # Change this according to your local
-dir = "~/Cabin/org/zettels"
+dir = "~/Cabin/org/zettels/inbox"
 
 # NOTE SETTINGS
 [note]
@@ -28,18 +28,6 @@ id-case = "lower"
 # EXTRA VARIABLES
 [extra]
 
-# GROUP OVERRIDES
-
-[group.fleeting]
-paths = ["fleeting"]
-[group.fleeting.note]
-template="fleeting.md"
-
-[group.permanent]
-paths = ["permanent"]
-[group.permanent.note]
-template="permanent.md"
-
 # MARKDOWN SETTINGS
 [format.markdown]
 link-format = "markdown"
@@ -57,7 +45,9 @@ shell = "/bin/bash"
 pager = "less -FIRX"
 # Command used to preview a note during interactive fzf mode.
 fzf-preview = "bat -p --color always {-1}"
-fzf-options = "--tiebreak begin --exact --tabstop 2 --height 100% --layout reverse-list --no-hscroll --color fg:7,bg:0,hl:1,fg+:255,bg+:1,hl+:255 --preview-window top:60%:wrap"
+# ctrl-o opens the selected note's built PDF in zathura (build-note --open builds
+# it first if the cache is missing/stale). {-1} is the note path, as in fzf-preview.
+fzf-options = "--tiebreak begin --exact --tabstop 2 --height 100% --layout reverse-list --no-hscroll --color fg:7,bg:0,hl:1,fg+:255,bg+:1,hl+:255 --preview-window bottom:60%:wrap --header 'ctrl-o: open PDF (zathura)' --bind 'ctrl-o:execute-silent(setsid -f /home/rdi/Cabin/org/scripts/build-note --open {-1} >/dev/null 2>&1)'"
 
 # NAMED FILTERS
 [filter]
@@ -72,9 +62,11 @@ lucky = "zk list --quiet --format full --sort random --limit 1"
 ls="zk list -foneline"
 paths = "zk list --format \"'{{path}}'\" --quiet --delimiter ' ' $@"
 
-journal = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal"'
-fleeting = 'zk new "$ZK_NOTEBOOK_DIR/inbox"'
-permanent = 'zk edit --interactive "$ZK_NOTEBOOK_DIR/permanent"'
+journal = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/journal"'
+fleeting = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/inbox"'
+permanent = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/permanent"'
+vocab = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/vocab"'
+task = 'zk edit --interactive --notebook-dir="/home/rdi/Cabin/org/zettels/task"'
 
 # LSP (EDITOR INTEGRATION)
 [lsp]
