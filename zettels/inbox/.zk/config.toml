@@ -6,4 +6,4 @@ is_literature = "1"
 
 [tool]
 fzf-line = "{{style 'white' title}}{{#each tags}} {{#style 'cyan'}} #{{this}}{{/style}}{{/each}} {{style 'white' body}}"
-fzf-options = "--preview-label='CAPTURE NOTE' --tiebreak begin --exact --tabstop 2 --height 100% --layout reverse-list --no-hscroll --preview-window top:60%:wrap --bind 'ctrl-o:execute-silent(setsid -f /home/rdi/Cabin/org/scripts/build-note --open {-1} >/dev/null 2>&1)' --bind 'start:change-header(Ctrl-E: new note   ·   Ctrl-O: open PDF)'"
+fzf-options = "--preview-label='CAPTURE NOTE' --tiebreak begin --exact --tabstop 2 --height 100% --layout reverse-list --no-hscroll --preview-window top:60%:wrap --bind 'ctrl-o:execute-silent(setsid -f /home/rdi/.config/scripts/docread {-1} >/dev/null 2>&1)' --bind 'start:change-header(Ctrl-E: new note   ·   Ctrl-O: open PDF)'"
