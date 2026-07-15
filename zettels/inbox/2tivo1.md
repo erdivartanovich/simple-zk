@@ -1,17 +1,25 @@
-#idea #shell #zsh
-2026-07-14 10:30
+---
+date_created: 2026-07-14 10:30
+---
 
 # A heredoc needs no command — redirect it straight to a file
+#idea #shell #zsh
 
 A heredoc is stdin, and a redirection can stand alone without a command. So the shell
 can append (or write) a here-document directly, no `cat`/`tee` needed:
 
+```bash
     >> ~/.config/zsh/aliases.zsh <<'EOF'
     alias gpo='git push origin'
     alias ga='git add .'
     EOF
+```
 
-`>>` appends, `>` overwrites; quote the delimiter (`<<'EOF'`) to write the lines verbatim.
+**Notes**:
+
+- `>>` appends, 
+- `>` overwrites; 
+- quote the delimiter (`<<'EOF'`) to write the lines verbatim.
 
 Why prefer this over `cat <<EOF >> file`: there's no command to go wrong — no alias to
 shadow it (e.g. `cat` aliased to `bat --color=always`, which injects escape codes), no

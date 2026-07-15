@@ -1,7 +1,9 @@
-#source
-2025-12-10 05:55
+---
+date_created: 2025-12-10 05:55
+---
 
 # Bash Test Operators Cheat Sheet
+#source
 
 Source: https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
 

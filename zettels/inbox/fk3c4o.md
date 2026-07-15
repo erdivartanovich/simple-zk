@@ -1,7 +1,9 @@
-#source
-2025-12-13 22:03
+---
+date_created: 2025-12-13 22:03
+---
 
 # Bash script can rarely need IF statement
+#source
 
 Source: https://www.youtube.com/watch?v=p0KKBmfiVl0
 Author: Luke Smith

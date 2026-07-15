@@ -1,7 +1,9 @@
-#idea #shell #zsh #ssh
-2026-07-14 09:30
+---
+date_created: 2026-07-14 09:30
+---
 
 # Pipe a heredoc into an interpreter to run a multiline command block
+#idea #shell #zsh #ssh
 
 A heredoc is just stdin. Point it at `cat` and you build a file; point it at a *shell*
 (or any interpreter) and the block gets executed line by line. This is the clean way to

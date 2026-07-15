@@ -1,11 +1,12 @@
-#source
-2026-01-22 22:20
-Source: https://www.youtube.com/watch?v=FbSpuZVb164
-Author:
-
+---
+date_created: 2026-01-22 22:20
 ---
 
 # How The 'awk' Command Made Me A 10x Engineer
+#source
+
+**Source**: https://www.youtube.com/watch?v=FbSpuZVb164
+**Author**:
 
 ## When to use `awk`
 

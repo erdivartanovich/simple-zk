@@ -1,6 +1,6 @@
-#source
-2026-07-10 03:14
-
+---
+type: #source
+date_created: "2026-07-10 03:14"
 ---
 
 # nvim cheatsheet: LSP and completion

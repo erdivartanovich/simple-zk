@@ -1,7 +1,9 @@
-#source
-2025-12-09 10:18
+---
+date_created: 2025-12-09 10:18
+---
 
 # Completion in Nvim
+#source
 
 Popular completion plugin in neovim that I prefer to use lately are:
 - nvim cmp

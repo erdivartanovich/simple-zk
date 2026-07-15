@@ -1,11 +1,9 @@
-#source
-2026-01-22 17:54
-
+---
+date_created: 2026-01-22 17:54
 ---
 
-#git #sh
-
 # Git Clean / Delete untrack files
+#source #git #sh
 
 ```sh
 git clean -xf

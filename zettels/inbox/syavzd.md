@@ -1,11 +1,12 @@
-#source
-Source:
-Author:
-2026-02-15 01:12
-
+---
+date_created: 2026-02-15 01:12
 ---
 
 # Ai-coding tools
+#source
+
+**Source**:
+**Author**:
 
 - https://github.com/fstandhartinger/ralph-wiggum
 - impeccable

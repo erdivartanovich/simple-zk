@@ -1,10 +1,9 @@
-#source
-2026-07-10 03:14
-
+---
+date_created: 2026-07-10 03:14
 ---
 
 # nvim cheatsheet: quickfix workflow
-
+#source
 
 #nvim #cheatsheet
 
@@ -21,4 +20,3 @@ Quickfix is the universal interface: git, find, grep, diagnostics, messages all 
 - Panels render on the lighter Panel tier; current entry = teal QuickFixLine
 
 Feeders: :Gstatus :Gdiff :GReview :Fd :Grep :Ggrep :Gblame :Msg
-

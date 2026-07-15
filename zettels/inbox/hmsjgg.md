@@ -1,9 +1,9 @@
-#source
-2026-03-14 20:57
-
+---
+date_created: 2026-03-14 20:57
 ---
 
 # Vim GQ Command - Format hard-wrapping lines of text
+#source
 
 gq operates in three main ways:
 

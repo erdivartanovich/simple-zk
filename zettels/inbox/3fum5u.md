@@ -1,10 +1,9 @@
-#source
-2026-07-10 03:14
-
+---
+date_created: 2026-07-10 03:14
 ---
 
 # nvim cheatsheet: git suite
-
+#source
 
 #nvim #cheatsheet
 
@@ -26,4 +25,3 @@ Whole-tree visual diff from shell: `git difftool -d [rev]` (nvim.difftool: quick
 Staging without gitsigns: `git add -p` in a terminal.
 
 Navigate results: `<M-j>` / `<M-k>` next/prev, `<M-q>` close.
-

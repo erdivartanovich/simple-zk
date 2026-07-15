@@ -1,11 +1,12 @@
-#source
-2026-01-28 09:53
-Source:
-Author:
-
+---
+date_created: 2026-01-28 09:53
 ---
 
 # Linux - Get CPU and Memory specs
+#source
+
+**Source**:
+**Author**:
 
 ## USING free
 

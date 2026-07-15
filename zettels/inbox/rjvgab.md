@@ -1,7 +1,9 @@
-#source
-2025-12-11 20:09
+---
+date_created: 2025-12-11 20:09
+---
 
 # Testing luafile
+#source
 
 ```bash
 $ cd /home/rdi/.config && lua -e "

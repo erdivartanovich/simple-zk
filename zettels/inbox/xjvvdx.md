@@ -1,9 +1,9 @@
-#source
-2026-07-12 20:56
-
+---
+date_created: 2026-07-12 20:56
 ---
 
 # xargs -0
+#source
 
 xargs -0 is a tool configuration that tells xargs to separate input items using a null byte (\0) instead of spaces or newlines. ￼
 It is used as a safety mechanism when piping lists of filenames between terminal commands.
@@ -28,4 +28,3 @@ the pipeline becomes completely unbreakable:
 #  Safe: The entire filename "User Profile.js" is treated as one unit
 git diff --name-only --cached -z | xargs -0 rm
 ```
-

@@ -1,11 +1,10 @@
-#source
-2026-07-10 17:18
-
+---
+date_created: 2026-07-10 17:18
 ---
 
-#nvim #cheatsheet
-
 # 🚀 Neovim Netrw Mastery Guide
+#source #nvim #cheatsheet
+
 Netrw is Neovim’s built-in file explorer. It provides full project management without external plugins.
 ------------------------------
 
@@ -65,5 +64,3 @@ If you want to expand these notes, let me know:
 * Should we add rules to hide folders like node_modules or .git?
 * Do you want code to auto-close Netrw when it is the last open buffer?
 * Would you like to map H/J/K/L for easier directory jumping?
-
-

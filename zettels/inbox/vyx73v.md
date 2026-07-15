@@ -1,11 +1,12 @@
-#source
-2026-01-28 20:05
-Source:
-Author:
-
+---
+date_created: 2026-01-28 20:05
 ---
 
 # Cron Job Line Specification
+#source
+
+**Source**:
+**Author**:
 
 # ┌───────── minute (0 - 59)
 

@@ -1,11 +1,12 @@
-#source
-2026-01-15 11:36
-Source:
-Author:
-
+---
+date_created: 2026-01-15 11:36
 ---
 
 # Pinentry
+#source
+
+**Source**:
+**Author**:
 
 Helper program used by GnuPG to securely prompt you for passphrases
 There are different variants:

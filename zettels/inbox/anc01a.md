@@ -1,7 +1,9 @@
-#idea
-2026-07-14 00:01
+---
+date_created: 2026-07-14 00:01
+---
 
 # git diff answers three different questions depending on the baseline
+#idea
 
 The confusion around "what did I change?" dissolves once you see that `git diff`
 is always comparing two of three snapshots: working tree, index (staging area),

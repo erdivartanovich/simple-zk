@@ -1,7 +1,9 @@
-#idea #shell #zsh #gotcha
-2026-07-14 10:00
+---
+date_created: 2026-07-14 10:00
+---
 
 # An aliased `cat` can corrupt redirected output with color codes
+#idea #shell #zsh #gotcha
 
 `cat` is aliased to `bat --style=plain --color=always`. In an interactive shell,
 `cat << EOF >> file` therefore runs *bat*, and `--color=always` emits ANSI escape

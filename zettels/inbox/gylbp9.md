@@ -1,7 +1,9 @@
-#source
-2025-12-16 05:44
+---
+date_created: 2025-12-16 05:44
+---
 
 # Bash Substring Expansion (${parameter:offset:length})
+#source
 
 Source: https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html#Shell-Parameter-Expansion-1
 

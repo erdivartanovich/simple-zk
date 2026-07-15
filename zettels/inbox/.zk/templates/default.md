@@ -1,17 +1,17 @@
+---
+date_created: {{format-date now "%Y-%m-%d %H:%M"}}
+---
+
+# {{title}}
 {{#if extra.is_literature}}
 #source
 {{else}}
 #idea
 {{/if}}
-{{format-date now "%Y-%m-%d %H:%M"}}
-
----
-
-# {{title}}
 
 {{#if extra.is_literature}}
-Source:
-Author:
+**Source**:
+**Author**:
 {{/if}}
 
 {{content}}

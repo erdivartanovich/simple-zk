@@ -1,7 +1,9 @@
-#source
-2025-12-26 14:32
+---
+date_created: 2025-12-26 14:32
+---
 
 # Vim - Execute current line as external command
+#source
 
 And replace the line with the result.
 

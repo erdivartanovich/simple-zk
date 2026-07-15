@@ -1,7 +1,9 @@
-#idea #zsh #shell
-2026-07-14 09:00
+---
+date_created: 2026-07-14 09:00
+---
 
 # A quoted heredoc delimiter decides whether the body is data or code
+#idea #zsh #shell
 
 `cat >> file <<EOF ... EOF` appends a block, but the *delimiter's quoting* silently
 changes what gets written:

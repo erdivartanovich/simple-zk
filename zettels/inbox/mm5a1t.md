@@ -1,10 +1,9 @@
-#source
-2026-07-10 19:01
-
+---
+date_created: 2026-07-10 19:01
 ---
 
 # nvim cheatsheet: netrw file ops
-
+#source
 
 #nvim #cheatsheet
 
@@ -28,4 +27,3 @@ Notes:
 - feedback implemented via g:Netrw_UserMaps in keymaps.lua (survives netrw re-renders; buffer-local overrides don't)
 - remote (scp/ftp) delete: use `<Del>` — the D wrapper is local-only
 - other useful marks: `me` edit marked, `md` diff marked (≤3), `mx` run command on marked
-

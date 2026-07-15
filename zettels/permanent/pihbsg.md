@@ -1,7 +1,9 @@
-#source #shell #zsh #bash
-2026-07-14 11:00
+---
+date_created: 2026-07-14 11:00
+---
 
 # Here-documents (heredocs) in the shell
+#source #shell #zsh #bash
 
 A **here-document** is inline text supplied to a command's standard input, introduced by
 `<<DELIM` and terminated by a line containing only `DELIM`. It is an *input* mechanism —
