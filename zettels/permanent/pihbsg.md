@@ -42,6 +42,7 @@ only to deliberately bake in a locally-computed value.
 ## Related detail (network references)
 
 Refined atomic points from this concept live as idea notes:
-`sxwi1g` (quoted vs unquoted = data vs code), `2tivo1` (a heredoc needs no command),
-`eqygem` (heredoc into an interpreter executes a block), `ettqbz` (an aliased `cat` —
-`bat --color=always` — corrupts redirected output with escape codes).
+- `sxwi1g` [quoted vs unquoted = data vs code), 
+- `2tivo1` (a heredoc needs no command),
+- `eqygem` (heredoc into an interpreter executes a block), 
+- `ettqbz` (an aliased `cat` — `bat --color=always` — corrupts redirected output with escape codes).
