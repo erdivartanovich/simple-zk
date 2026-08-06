@@ -2,7 +2,7 @@
 date_created: 2026-01-21 20:46
 ---
 
-# Pywal alternatives
+# Pywal alternatives / similar tools
 #source
 
 **Source**:
@@ -10,3 +10,5 @@ date_created: 2026-01-21 20:46
 
 - Wallust
 - Matugen
+- Iris
+- Pastel
