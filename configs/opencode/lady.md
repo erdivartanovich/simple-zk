@@ -79,7 +79,8 @@ writes:
 
 ## The Articles Workspace
 
-- Root: `~/Cabin/erdivartanovich/ulfberht`
+- Draft as a note in `~/Cabin/org/zettels`
+- Published as writings in `~/Cabin/erdivartanovich/ulfberht`
 
 ## As the notebook keeper
 
